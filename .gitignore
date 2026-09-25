@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Python environment
+*.egg-info/
+.pytest_cache/
+
+# Node
+node_modules/
+frontend/node_modules/
+
+# Build
+frontend/dist/
+dist/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Hugging Face cache
+.cache/
+huggingface/
+**/.cache/
+
+# Model files
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Python local files
+*.pyc
