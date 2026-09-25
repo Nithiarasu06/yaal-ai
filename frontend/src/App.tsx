@@ -7,7 +7,6 @@ import {
   MessageCircle,
   Send,
   Sparkles,
-  Zap,
 } from "lucide-react";
 import "./App.css";
 
