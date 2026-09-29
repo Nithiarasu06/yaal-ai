@@ -1,0 +1,211 @@
+{
+  "evaluation": {
+    "total_prompts": 100,
+    "judge_model": "Qwen/Qwen2.5-3B-Instruct",
+    "scoring_scale": "1-5",
+    "criteria": [
+      "tamil_fluency",
+      "instruction_following",
+      "factual_accuracy",
+      "relevance"
+    ]
+  },
+  "inference_benchmark": {
+    "sarvam": {
+      "successful_prompts": 100,
+      "average_generation_time": 2.0002,
+      "average_generated_tokens": 49.88,
+      "average_tokens_per_second": 24.9
+    },
+    "yaal": {
+      "successful_prompts": 100,
+      "average_generation_time": 3.006,
+      "average_generated_tokens": 51.04,
+      "average_tokens_per_second": 16.89
+    }
+  },
+  "quality": {
+    "sarvam": {
+      "tamil_fluency": 3.78,
+      "instruction_following": 4.62,
+      "factual_accuracy": 4.26,
+      "relevance": 4.12,
+      "overall": 4.195,
+      "evaluated": 100
+    },
+    "yaal": {
+      "tamil_fluency": 4.13,
+      "instruction_following": 4.7,
+      "factual_accuracy": 4.54,
+      "relevance": 4.44,
+      "overall": 4.453,
+      "evaluated": 100
+    }
+  },
+  "category_scores": {
+    "sarvam": {
+      "general_qa": {
+        "tamil_fluency": 2.2,
+        "instruction_following": 3.6,
+        "factual_accuracy": 2.7,
+        "relevance": 2.6,
+        "overall": 2.775,
+        "count": 10
+      },
+      "factual": {
+        "tamil_fluency": 3.4,
+        "instruction_following": 4.7,
+        "factual_accuracy": 3.7,
+        "relevance": 3.7,
+        "overall": 3.875,
+        "count": 10
+      },
+      "instruction_following": {
+        "tamil_fluency": 3.5,
+        "instruction_following": 4.5,
+        "factual_accuracy": 3.9,
+        "relevance": 3.8,
+        "overall": 3.925,
+        "count": 10
+      },
+      "conversation": {
+        "tamil_fluency": 3.5,
+        "instruction_following": 4.8,
+        "factual_accuracy": 4.8,
+        "relevance": 4.1,
+        "overall": 4.3,
+        "count": 10
+      },
+      "translation": {
+        "tamil_fluency": 5.0,
+        "instruction_following": 5.0,
+        "factual_accuracy": 5.0,
+        "relevance": 5.0,
+        "overall": 5.0,
+        "count": 10
+      },
+      "summarization": {
+        "tamil_fluency": 4.2,
+        "instruction_following": 4.7,
+        "factual_accuracy": 4.6,
+        "relevance": 4.6,
+        "overall": 4.525,
+        "count": 10
+      },
+      "grammar": {
+        "tamil_fluency": 4.6,
+        "instruction_following": 5.0,
+        "factual_accuracy": 5.0,
+        "relevance": 5.0,
+        "overall": 4.9,
+        "count": 10
+      },
+      "how_to": {
+        "tamil_fluency": 3.4,
+        "instruction_following": 4.6,
+        "factual_accuracy": 4.4,
+        "relevance": 3.8,
+        "overall": 4.05,
+        "count": 10
+      },
+      "reasoning": {
+        "tamil_fluency": 4.5,
+        "instruction_following": 5.0,
+        "factual_accuracy": 5.0,
+        "relevance": 5.0,
+        "overall": 4.875,
+        "count": 10
+      },
+      "tamil_knowledge": {
+        "tamil_fluency": 3.5,
+        "instruction_following": 4.3,
+        "factual_accuracy": 3.5,
+        "relevance": 3.6,
+        "overall": 3.725,
+        "count": 10
+      }
+    },
+    "yaal": {
+      "general_qa": {
+        "tamil_fluency": 3.7,
+        "instruction_following": 4.7,
+        "factual_accuracy": 4.6,
+        "relevance": 4.4,
+        "overall": 4.35,
+        "count": 10
+      },
+      "factual": {
+        "tamil_fluency": 4.5,
+        "instruction_following": 4.9,
+        "factual_accuracy": 4.5,
+        "relevance": 4.7,
+        "overall": 4.65,
+        "count": 10
+      },
+      "instruction_following": {
+        "tamil_fluency": 4.2,
+        "instruction_following": 4.8,
+        "factual_accuracy": 4.8,
+        "relevance": 4.5,
+        "overall": 4.575,
+        "count": 10
+      },
+      "conversation": {
+        "tamil_fluency": 3.8,
+        "instruction_following": 4.5,
+        "factual_accuracy": 4.4,
+        "relevance": 3.9,
+        "overall": 4.15,
+        "count": 10
+      },
+      "translation": {
+        "tamil_fluency": 4.6,
+        "instruction_following": 4.7,
+        "factual_accuracy": 4.6,
+        "relevance": 4.7,
+        "overall": 4.65,
+        "count": 10
+      },
+      "summarization": {
+        "tamil_fluency": 4.7,
+        "instruction_following": 5.0,
+        "factual_accuracy": 5.0,
+        "relevance": 5.0,
+        "overall": 4.925,
+        "count": 10
+      },
+      "grammar": {
+        "tamil_fluency": 4.4,
+        "instruction_following": 5.0,
+        "factual_accuracy": 5.0,
+        "relevance": 5.0,
+        "overall": 4.85,
+        "count": 10
+      },
+      "how_to": {
+        "tamil_fluency": 3.0,
+        "instruction_following": 4.0,
+        "factual_accuracy": 4.0,
+        "relevance": 3.4,
+        "overall": 3.6,
+        "count": 10
+      },
+      "reasoning": {
+        "tamil_fluency": 4.1,
+        "instruction_following": 4.7,
+        "factual_accuracy": 4.1,
+        "relevance": 4.1,
+        "overall": 4.25,
+        "count": 10
+      },
+      "tamil_knowledge": {
+        "tamil_fluency": 4.3,
+        "instruction_following": 4.7,
+        "factual_accuracy": 4.4,
+        "relevance": 4.7,
+        "overall": 4.525,
+        "count": 10
+      }
+    }
+  }
+}
