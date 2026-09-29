@@ -1,581 +1,252 @@
-# யாழ் — YAAL
-
-### Tamil Small Language Model Assistant
+# YAAL — தமிழ் AI
 
 <p align="center">
-  <img src="frontend/public/yaal.svg" width="110" alt="YAAL Logo">
+  <img src="docs/screenshots/home.png" alt="YAAL Home" width="900">
+</p>
+
+<h3 align="center">தமிழில் கேளுங்கள். YAAL உடன் உரையாடுங்கள்.</h3>
+
+<p align="center">
+  A Tamil-focused language model application powered by Sarvam-1 with Tamil LoRA adaptation.
 </p>
 
 <p align="center">
-  <strong>தமிழில் கேளுங்கள். YAAL உடன் உரையாடுங்கள்.</strong>
-</p>
-
-<p align="center">
-  A Tamil-focused AI assistant built using Sarvam-1 and a custom Tamil LoRA adapter.
-</p>
-
-<p align="center">
-
-![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.11-orange?logo=pytorch)
-![React](https://img.shields.io/badge/React-TypeScript-blue?logo=react)
-![Vite](https://img.shields.io/badge/Vite-Frontend-purple?logo=vite)
-![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi)
-![CUDA](https://img.shields.io/badge/CUDA-GPU-green?logo=nvidia)
-![License](https://img.shields.io/badge/License-Educational-lightgrey)
-
+  <a href="https://github.com/Nithiarasu06/yaal-ai">GitHub</a> •
+  <a href="https://yaal-ai.vercel.app/">Live Demo</a>
 </p>
 
 ---
 
-## 🌐 Live Demo
+## 📌 Overview
 
-### [YAAL — Live Demo](https://yaal-ai.vercel.app/)
+**YAAL** is a Tamil-focused AI assistant built to experiment with Tamil language adaptation, local inference, and an end-to-end LLM application stack.
 
-> The web interface is deployed for demonstration. Local GPU inference is used for the YAAL model backend.
+The project combines:
 
----
+- **Sarvam-1** as the base language model
+- **Tamil LoRA / PEFT** for parameter-efficient adaptation
+- A curated Tamil instruction dataset
+- **FastAPI** backend for inference
+- **React + TypeScript + Vite** frontend
+- Local **NVIDIA RTX 3050 6 GB** inference
+- A dedicated Tamil chat interface
+- A documented evaluation pipeline for comparing the adapted model with the base model
 
-# 🧠 What is YAAL?
-
-**YAAL** is a Tamil-focused AI assistant built around a fine-tuned Sarvam-1 model.
-
-The project combines a pretrained Indic language model with a Tamil-specific LoRA adapter and a custom web application.
-
-```text
-                    YAAL
-                     │
-          ┌──────────┴──────────┐
-          │                     │
-     AI Model Stack        Web Application
-          │                     │
-    Sarvam-1 + LoRA       React + TypeScript
-          │                     │
-          └──────────┬──────────┘
-                     │
-                Tamil AI
-```
-
-The primary goal is to experiment with building a practical Tamil-oriented Small Language Model application that can run on consumer GPU hardware.
+> **Important:** YAAL is a project/model adaptation built on Sarvam-1. It is not presented as a new foundation model trained from scratch.
 
 ---
 
-# ✨ Features
+# 🧠 Model
 
-- 🇮🇳 Tamil-first conversational interface
-- 🧠 Sarvam-1 base language model
-- 🔗 Custom Tamil LoRA adapter
-- ⚡ FastAPI inference backend
-- 💻 React + TypeScript + Vite frontend
-- 🎮 CUDA GPU acceleration
-- 🖥️ Local inference support
-- 📊 Generation-time measurement
-- 🔢 Generated-token measurement
-- 🌐 Web-based chat interface
-- 📱 Responsive UI
-- 🎨 Custom YAAL visual identity
-- 🔌 REST API for model inference
-
----
-
-# 📸 Screenshots
-
-## YAAL Home
-
-![YAAL Home](docs/screenshots/home.png)
-
-## Tamil Conversation
-
-![YAAL Chat](docs/screenshots/chat.png)
-
-## API Response
-
-![YAAL API](docs/screenshots/api.png)
-
-Example API response:
-
-```json
-{
-  "prompt": "தமிழ்நாட்டின் தலைநகரம் எது?",
-  "response": "தமிழ்நாட்டின் தலைநகரம் சென்னை ஆகும்.",
-  "generation_time": 4.01,
-  "generated_tokens": 15
-}
-```
-
----
-
-# 🏗️ System Architecture
-
-```text
-┌───────────────────────┐
-│         USER          │
-│    Tamil Question     │
-└───────────┬───────────┘
-            │
-            ▼
-┌───────────────────────┐
-│     YAAL FRONTEND     │
-│                       │
-│ React                  │
-│ TypeScript             │
-│ Vite                   │
-└───────────┬───────────┘
-            │
-            │ HTTP Request
-            ▼
-┌───────────────────────┐
-│     FASTAPI SERVER    │
-│        Python         │
-└───────────┬───────────┘
-            │
-            ▼
-┌───────────────────────┐
-│       TOKENIZER       │
-│   Sarvam Tokenizer    │
-└───────────┬───────────┘
-            │
-            ▼
-┌─────────────────────────────┐
-│         MODEL STACK         │
-│                             │
-│        Sarvam-1             │
-│             +               │
-│       Tamil LoRA            │
-└─────────────┬───────────────┘
-              │
-              ▼
-┌───────────────────────┐
-│     GPU INFERENCE     │
-│   NVIDIA RTX 3050     │
-│       6 GB VRAM       │
-└───────────┬───────────┘
-            │
-            ▼
-┌───────────────────────┐
-│    Tamil Response     │
-└───────────┬───────────┘
-            │
-            ▼
-┌───────────────────────┐
-│       YAAL UI         │
-└───────────────────────┘
-```
-
-Detailed architecture:
-
-[`docs/architecture.md`](docs/architecture.md)
-
----
-
-# 🔬 Model Architecture
-
-YAAL does not represent a completely independent foundation model.
-
-Instead, it uses a **base model + parameter-efficient adaptation** approach.
-
-```text
-                Sarvam-1
-             Base Language Model
-                     │
-                     ▼
-              Tamil LoRA Adapter
-                     │
-                     ▼
-             YAAL Model Stack
-                     │
-                     ▼
-             FastAPI Inference
-                     │
-                     ▼
-                YAAL UI
-```
-
-### Components
-
-| Component | Role |
-|---|---|
-| Sarvam-1 | Base language model |
-| Tamil LoRA | Tamil-focused adaptation |
-| PEFT | Parameter-efficient fine-tuning |
-| PyTorch | Model execution |
-| FastAPI | Inference API |
-| React | User interface |
-| CUDA | GPU acceleration |
-
----
-
-# 📊 Sarvam-1 vs YAAL — Experimental Comparison
-
-YAAL was developed by adapting the Sarvam-1 base model with a Tamil-focused LoRA adapter.
-
-The purpose of this comparison is to evaluate the effect of the Tamil fine-tuning by testing the base Sarvam-1 model and YAAL under the same evaluation conditions.
-
-## 🧪 Evaluation Setup
-
-Both models should be evaluated using:
-
-- The same prompts
-- The same evaluation dataset
-- The same inference environment
-- The same generation settings
-
-This section is intended for measured experimental results. Values should be filled from the project's actual evaluation output and should not be estimated.
-
-## 📈 Comparison Results
-
-| Metric | Sarvam-1 | YAAL |
-|---|---:|---:|
-| Tamil Response Quality | — | — |
-| Instruction Following | — | — |
-| Tamil Fluency | — | — |
-| Factual Accuracy | — | — |
-| Average Generation Time | — | — |
-| Average Generated Tokens | — | — |
-
-> No comparison values are claimed here until they are taken from the project's actual evaluation results.
-
-## 🔬 Qualitative Comparison
-
-### Example 1
-
-**Prompt**
-
-```text
-தமிழ்நாட்டின் தலைநகரம் எது?
-```
+## Base Model
 
 **Sarvam-1**
 
-```text
-[Insert the actual Sarvam-1 response from evaluation]
-```
+YAAL uses Sarvam-1 as its base model and applies a Tamil LoRA adapter through PEFT.
 
-**YAAL**
+### YAAL configuration
 
-```text
-தமிழ்நாட்டின் தலைநகரம் சென்னை ஆகும்.
-```
+| Property | YAAL |
+|---|---:|
+| Base model | Sarvam-1 |
+| Adaptation | Tamil LoRA |
+| Fine-tuning method | LoRA / PEFT |
+| Total parameters | 2,549,057,536 |
+| Trainable parameters | 23,969,792 |
+| Trainable percentage | 0.9403% |
+| Maximum sequence length used | 768 tokens |
+| Inference hardware | NVIDIA RTX 3050 6 GB |
+| Backend | FastAPI |
+| Frontend | React + TypeScript + Vite |
 
-### Example 2
-
-**Prompt**
-
-```text
-[Insert evaluation prompt]
-```
-
-**Sarvam-1**
-
-```text
-[Insert actual Sarvam-1 response]
-```
-
-**YAAL**
-
-```text
-[Insert actual YAAL response]
-```
-
-## 📊 Comparison Flow
-
-```text
-                    Sarvam-1
-                       │
-                       │
-              Tamil LoRA Fine-Tuning
-                       │
-                       ▼
-                      YAAL
-                       │
-                       ▼
-             Same Evaluation Set
-                       │
-          ┌────────────┴────────────┐
-          ▼                         ▼
-      Sarvam-1                    YAAL
-          │                         │
-          └────────────┬────────────┘
-                       ▼
-                Compare Results
-```
+The reported parameter counts are from the YAAL training setup.
 
 ---
 
 # 📚 Dataset
 
-The project uses a Tamil-focused supervised fine-tuning dataset.
+YAAL's training data combines cleaned Tamil instruction-style data from two sources used during development.
 
-The dataset preparation process included:
+### Dataset preparation
 
-```text
-Raw Tamil Data
-      │
-      ▼
-Data Collection
-      │
-      ▼
-Content Cleaning
-      │
-      ▼
-Safety Filtering
-      │
-      ▼
-Quality Filtering
-      │
-      ▼
-Dataset Combination
-      │
-      ▼
-Train / Validation / Test Split
-```
+| Dataset stage | Samples |
+|---|---:|
+| Indic SFT Tamil extracted | 8,000 |
+| Indic SFT Tamil after cleaning | 7,993 |
+| Indic SFT Tamil final | 7,935 |
+| VAZHI original | 5,328 |
+| VAZHI after safety filtering | 3,698 |
+| Combined dataset before deduplication | 11,633 |
+| Final combined samples | 11,633 |
 
-## Final Dataset
+### Final split
 
 | Split | Samples |
 |---|---:|
-| Train | 9,306 |
+| Training | 9,306 |
 | Validation | 1,163 |
 | Test | 1,164 |
 | **Total** | **11,633** |
 
-## Dataset characteristics
+**Random seed:** `42`
 
-The combined dataset contains different types of Tamil instructional and conversational examples, including:
+### Task distribution
 
-- Chat
-- Instruction
-- How-to
-- Conversational data
-- Knowledge-oriented conversations
-- Tamil instruction-following examples
+| Task | Samples |
+|---|---:|
+| Chat | 3,749 |
+| Instruction | 2,994 |
+| How-to | 1,250 |
 
----
-
-# 🧹 Dataset Processing
-
-The Tamil data preparation pipeline included:
-
-### 1. Collection
-
-Tamil samples were collected from multiple datasets.
-
-### 2. Cleaning
-
-Low-quality and problematic content was removed.
-
-### 3. Filtering
-
-Safety and content-quality filtering was applied.
-
-### 4. Combination
-
-The cleaned datasets were combined into a unified Tamil SFT dataset.
-
-### 5. Splitting
-
-The final dataset was divided into:
-
-```text
-Train       → 9,306
-Validation  → 1,163
-Test        → 1,164
-```
+The remaining dataset characteristics are documented in the project documentation.
 
 ---
 
-# 🧪 Training Pipeline
+# 🔧 Training
+
+YAAL uses parameter-efficient fine-tuning rather than updating all model parameters.
+
+### Training approach
 
 ```text
-Tamil Datasets
+Tamil datasets
       │
       ▼
-Data Collection
+Data cleaning
       │
       ▼
-Cleaning & Filtering
+Safety filtering
       │
       ▼
-Tamil SFT Dataset
+Dataset combination
       │
       ▼
-Train / Validation / Test
+Train / Validation / Test split
       │
-      ├─────────────────┐
-      │                 │
-      ▼                 ▼
-Sarvam-1            Tamil Dataset
-Base Model               │
-      │                  │
-      └────────┬─────────┘
-               ▼
-          LoRA / PEFT
-               │
-               ▼
-          Fine-Tuning
-               │
-               ▼
-        Tamil LoRA Adapter
-               │
-               ▼
-        Hugging Face Hub
-               │
-               ▼
-          YAAL Backend
-               │
-               ▼
-        GPU Inference
+      ▼
+Sarvam-1
+      │
+      ▼
+Tamil LoRA / PEFT
+      │
+      ▼
+YAAL adapter
+      │
+      ▼
+Local inference
 ```
 
-Detailed training documentation:
+This approach keeps the number of trainable parameters relatively small compared with the full model.
 
-[`docs/training-pipeline.md`](docs/training-pipeline.md)
+More details:
+
+- [`docs/training-pipeline.md`](docs/training-pipeline.md)
+- [`docs/architecture.md`](docs/architecture.md)
 
 ---
 
-# ⚙️ Fine-Tuning
-
-YAAL uses **parameter-efficient fine-tuning** rather than modifying the entire base model.
-
-### Approach
+# 🏗️ Architecture
 
 ```text
-Base Model
-   +
-Tamil SFT Dataset
-   ↓
-LoRA / PEFT
-   ↓
-Train Adapter Parameters
-   ↓
-Save LoRA Adapter
-   ↓
-Load Adapter with Base Model
+┌───────────────────────────────┐
+│       React + TypeScript      │
+│          Vite Frontend        │
+└───────────────┬───────────────┘
+                │ HTTP
+                ▼
+┌───────────────────────────────┐
+│          FastAPI API          │
+│       Inference Endpoint      │
+└───────────────┬───────────────┘
+                │
+                ▼
+┌───────────────────────────────┐
+│          YAAL Engine           │
+│                               │
+│       Sarvam-1 + Tamil LoRA   │
+└───────────────┬───────────────┘
+                │
+                ▼
+┌───────────────────────────────┐
+│     NVIDIA RTX 3050 6 GB      │
+│       Local GPU Inference     │
+└───────────────────────────────┘
 ```
 
-This approach reduces the number of parameters that need to be updated during training compared with full-model fine-tuning.
+See [`docs/architecture.md`](docs/architecture.md).
 
 ---
 
-# 🤖 Model Specifications
+# 💻 Technology Stack
 
-| Specification | YAAL |
-|---|---|
-| Base Model | Sarvam-1 |
-| Adaptation | Tamil LoRA |
-| Fine-Tuning | PEFT / LoRA |
-| Framework | PyTorch |
-| Tokenizer | Sarvam tokenizer |
-| Backend | FastAPI |
-| Runtime | Uvicorn |
-| GPU | NVIDIA GeForce RTX 3050 |
-| VRAM | 6 GB |
-| CUDA | Enabled |
-| Inference | Local GPU |
+### AI / ML
+
+- Python
+- PyTorch
+- Hugging Face Transformers
+- PEFT / LoRA
+- Datasets
+- Sarvam-1
+
+### Backend
+
+- FastAPI
+- Uvicorn
+- Python
+
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- CSS
+
+### Development
+
+- Git
+- GitHub
+- NVIDIA CUDA
+- Local GPU inference
 
 ---
 
-# 💻 Hardware
+# 🖥️ Screenshots
 
-YAAL was developed and tested using consumer GPU hardware.
+## 🏠 YAAL Home
 
-### Local GPU
+<p align="center">
+  <img src="docs/screenshots/home.png" alt="YAAL Home" width="1000">
+</p>
+
+## 💬 Tamil Conversation
+
+<p align="center">
+  <img src="docs/screenshots/chat.png" alt="YAAL Tamil Chat" width="1000">
+</p>
+
+## 🔌 API Response
+
+<p align="center">
+  <img src="docs/screenshots/api.png" alt="YAAL API Response" width="1000">
+</p>
+
+---
+
+# ⚡ Example Inference
+
+Example prompt:
 
 ```text
-GPU:
-NVIDIA GeForce RTX 3050 Laptop GPU
-
-VRAM:
-6 GB
-
-CUDA:
-Enabled
+தமிழ்நாட்டின் தலைநகரம் எது?
 ```
 
----
-
-# 🚀 Installation
-
-## 1. Clone the repository
-
-```bash
-git clone https://github.com/Nithiarasu06/yaal-ai.git
-cd yaal-ai
-```
-
----
-
-# 🐍 Backend Setup
-
-Go to the backend:
-
-```bash
-cd backend
-```
-
-Install Python dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Start the backend:
-
-```bash
-python main.py
-```
-
-The FastAPI server should run at:
+Example YAAL response:
 
 ```text
-http://127.0.0.1:8000
+தமிழ்நாட்டின் தலைநகரம் சென்னை ஆகும்.
 ```
 
----
-
-# 🌐 Frontend Setup
-
-Open another terminal.
-
-From the project root:
-
-```bash
-cd frontend
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-Open:
-
-```text
-http://localhost:5173
-```
-
----
-
-# 🔌 API
-
-YAAL exposes model inference through a FastAPI endpoint.
-
-## Example Request
-
-```json
-{
-  "prompt": "தமிழ்நாட்டின் தலைநகரம் எது?"
-}
-```
-
-## Example Response
+One observed local API response during development:
 
 ```json
 {
@@ -586,208 +257,219 @@ YAAL exposes model inference through a FastAPI endpoint.
 }
 ```
 
----
+This is **one observed inference**, not an average benchmark result.
 
-# 📊 Inference Metrics
-
-YAAL records basic generation metrics.
-
-### Generation Time
-
-The API reports the time taken to generate a response.
-
-Example:
+The corresponding throughput for this observation is approximately:
 
 ```text
-generation_time: 4.01 seconds
+15 / 4.01 ≈ 3.74 tokens/second
 ```
 
-### Generated Tokens
-
-The API also reports the number of generated tokens.
-
-Example:
-
-```text
-generated_tokens: 15
-```
-
-These measurements can be used for future performance benchmarking.
+> This value should not be treated as a final model benchmark until it is measured over a controlled evaluation set.
 
 ---
 
-# 🖥️ Frontend
+# 📊 Model Evaluation
 
-The YAAL frontend was built using:
+## Sarvam-1 vs YAAL
 
-```text
-React
-   +
-TypeScript
-   +
-Vite
-```
+The objective of the evaluation is to compare the **base Sarvam-1 model** and **YAAL (Sarvam-1 + Tamil LoRA)** under the same conditions.
 
-The interface provides:
+The comparison should use:
 
-- Tamil-first chat experience
-- Responsive layout
-- Model status
-- Generation information
-- Copy response functionality
-- Regeneration interface
-- YAAL branding
-- Dark AI-oriented visual design
+- The same test prompts
+- The same hardware
+- The same tokenizer
+- The same generation parameters
+- The same maximum output length
+- The same number of runs
+- The same evaluation procedure
 
----
+### Current status
 
-# 🛠️ Technology Stack
+The controlled benchmark has **not yet been completed**.
 
-## AI / ML
+| Metric | Sarvam-1 | YAAL | Status |
+|---|---:|---:|---|
+| Tamil response quality | Not measured | Not measured | 🔄 To evaluate |
+| Instruction following | Not measured | Not measured | 🔄 To evaluate |
+| Tamil fluency | Not measured | Not measured | 🔄 To evaluate |
+| Factual accuracy | Not measured | Not measured | 🔄 To evaluate |
+| Average generation time | Not measured | Not measured | 🔄 To benchmark |
+| Average generated tokens | Not measured | Not measured | 🔄 To benchmark |
+| Tokens / second | Not measured | Not measured | 🔄 To benchmark |
+| GPU memory usage | Not measured | Not measured | 🔄 To benchmark |
 
-- Python
-- PyTorch
-- Transformers
-- PEFT
-- LoRA
-- BitsAndBytes
-- CUDA
+### Model configuration comparison
 
-## Backend
+| Property | Sarvam-1 | YAAL |
+|---|---|---|
+| Base model | Sarvam-1 | Sarvam-1 |
+| Tamil adaptation | Base model | Tamil LoRA |
+| Fine-tuning | — | LoRA / PEFT |
+| Total parameters | Base model | 2,549,057,536 |
+| Trainable parameters | — | 23,969,792 |
+| Trainable percentage | — | 0.9403% |
+| Maximum sequence length used by YAAL | — | 768 tokens |
+| Local inference | To be measured | Tested |
+| Controlled benchmark | Not measured | Not measured |
 
-- FastAPI
-- Uvicorn
-
-## Frontend
-
-- React
-- TypeScript
-- Vite
-- Framer Motion
-- Lucide React
-
-## Development
-
-- Git
-- GitHub
-- VS Code
-- Hugging Face
+> **No performance winner is claimed at this stage.** Numerical comparison values will be added after controlled evaluation.
 
 ---
 
-# 📁 Project Structure
+# 🧪 How YAAL Should Be Evaluated
+
+A reproducible evaluation can be performed using a fixed Tamil test set.
+
+## 1. Build a test set
+
+Create approximately **100–300 Tamil prompts** covering several categories:
 
 ```text
-yaal-ai/
-│
-├── backend/
-│   ├── main.py
-│   └── requirements.txt
-│
-├── frontend/
-│   ├── public/
-│   │   ├── yaal.svg
-│   │   ├── favicon.svg
-│   │   └── icons.svg
-│   │
-│   ├── src/
-│   │   ├── App.tsx
-│   │   ├── App.css
-│   │   ├── index.css
-│   │   └── main.tsx
-│   │
-│   ├── package.json
-│   ├── package-lock.json
-│   └── vite.config.ts
-│
-├── docs/
-│   ├── screenshots/
-│   │   ├── home.png
-│   │   ├── chat.png
-│   │   └── api.png
-│   │
-│   ├── architecture.md
-│   └── training-pipeline.md
-│
-├── package.json
-├── package-lock.json
-├── .gitignore
-└── README.md
+General knowledge
+Factual QA
+Instruction following
+Summarization
+Translation
+Tamil grammar
+Tamil conversation
+Reasoning
+How-to questions
+Safety / refusal cases
 ```
 
----
-
-# 🧩 Why LoRA?
-
-Full fine-tuning requires updating a very large number of model parameters.
-
-LoRA instead introduces trainable low-rank adapter parameters while keeping most of the original model weights unchanged.
-
-```text
-Traditional Fine-Tuning
-
-Base Model
-    ↓
-Update Model Parameters
-    ↓
-New Full Model
-```
-
-```text
-YAAL
-
-Base Model
-    +
-Small Trainable LoRA Adapter
-    ↓
-Tamil Adaptation
-```
-
-This makes parameter-efficient experimentation more practical on limited hardware.
-
----
-
-# 🔄 Inference Flow
-
-When a user asks a question:
-
-```text
-1. User enters Tamil question
-             ↓
-2. React frontend sends API request
-             ↓
-3. FastAPI receives prompt
-             ↓
-4. Tokenizer processes input
-             ↓
-5. Sarvam-1 + Tamil LoRA generate tokens
-             ↓
-6. GPU performs inference
-             ↓
-7. Generated text is returned
-             ↓
-8. Frontend displays Tamil response
-```
-
----
-
-# 📌 Example
-
-### User
+For example:
 
 ```text
 தமிழ்நாட்டின் தலைநகரம் எது?
+
+கீழ்கண்ட வாக்கியத்தை சுருக்கமாக எழுதுங்கள்:
+...
+
+இந்த உரையை ஆங்கிலத்தில் மொழிபெயர்க்கவும்:
+...
+
+தமிழில் ஒரு சிறிய மழைக்காலக் கவிதை எழுதுங்கள்.
 ```
 
-### YAAL
+Keep the exact same prompts for both models.
+
+## 2. Run Sarvam-1
+
+Run the base model without the YAAL Tamil LoRA adapter.
+
+Record:
 
 ```text
-தமிழ்நாட்டின் தலைநகரம் சென்னை ஆகும்.
+prompt
+response
+generation_time
+generated_tokens
+tokens_per_second
+GPU_memory
 ```
+
+## 3. Run YAAL
+
+Run exactly the same prompts with the Tamil LoRA adapter.
+
+Record the same measurements.
+
+## 4. Measure generation performance
+
+For each prompt:
+
+```text
+tokens_per_second =
+generated_tokens / generation_time
+```
+
+Then calculate:
+
+```text
+average_generation_time
+average_generated_tokens
+average_tokens_per_second
+```
+
+For more reliable timing, discard the first warm-up run and run each prompt multiple times if practical.
+
+## 5. Evaluate response quality
+
+For human evaluation, use a fixed rubric such as:
+
+| Criterion | Suggested scale |
+|---|---:|
+| Tamil fluency | 1–5 |
+| Factual accuracy | 1–5 |
+| Instruction following | 1–5 |
+| Relevance | 1–5 |
+| Overall response quality | 1–5 |
+
+The same evaluator and rubric should be used for both models.
+
+## 6. Add the real results
+
+After evaluation, replace:
+
+```text
+Not measured
+```
+
+with the actual measured values.
+
+For example:
+
+```text
+| Average generation time | <measured value> | <measured value> |
+| Tokens / second | <measured value> | <measured value> |
+```
+
+Do not enter estimated or manually selected values.
 
 ---
 
-# 📈 Current Project Status
+# 📈 Recommended Evaluation Report
+
+The final evaluation should contain three parts.
+
+### Quantitative
+
+```text
+Average generation time
+Average tokens generated
+Tokens / second
+GPU memory usage
+```
+
+### Qualitative
+
+```text
+Tamil fluency
+Instruction following
+Factual accuracy
+Relevance
+Overall quality
+```
+
+### Error analysis
+
+Document examples where either model:
+
+- Produces an incorrect fact
+- Uses unnatural Tamil
+- Fails to follow an instruction
+- Produces irrelevant content
+- Repeats text
+- Stops unexpectedly
+- Mixes Tamil and English unnecessarily
+
+This makes the evaluation more useful than a single aggregate score.
+
+---
+
+# 📋 Current Project Status
 
 | Component | Status |
 |---|---|
@@ -802,174 +484,149 @@ When a user asks a question:
 | Tamil chat interface | ✅ Complete |
 | GitHub repository | ✅ Complete |
 | Web interface deployment | ✅ Complete |
-| Model evaluation | 🔄 Ongoing |
-| Performance optimization | 🔄 Ongoing |
-| Larger-scale evaluation | 🔄 Planned |
+| Controlled model evaluation | 🔄 Ongoing |
+| Performance benchmarking | 🔄 Ongoing |
+| Larger-scale evaluation | 📋 Planned |
 
 ---
 
-# 🔮 Future Work
+# 🚀 Running YAAL Locally
 
-### Model
+## Clone
 
-- Improved Tamil instruction tuning
-- Higher-quality Tamil datasets
-- More extensive evaluation
-- Tamil benchmark creation
-- Better conversational consistency
+```bash
+git clone https://github.com/Nithiarasu06/yaal-ai.git
+cd yaal-ai
+```
 
-### Performance
+## Backend
 
-- Inference optimization
-- Reduced generation latency
-- Memory optimization
-- Quantization experiments
-- Streaming generation
+```bash
+cd backend
+pip install -r requirements.txt
+```
 
-### Application
+Start the FastAPI server according to the backend configuration.
 
-- Conversation memory
-- Better error handling
-- Improved mobile interface
-- Tamil voice input
-- Tamil text-to-speech
-- More language support
+## Frontend
 
-### Evaluation
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-Future evaluation will examine:
+The frontend communicates with the inference backend through the configured API endpoint.
 
-- Tamil fluency
-- Instruction following
-- Factual accuracy
-- Response consistency
-- Generation latency
-- Token throughput
+---
+
+# 📁 Project Structure
+
+```text
+yaal-ai/
+│
+├── backend/
+│   ├── main.py
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── public/
+│   └── src/
+│       ├── App.tsx
+│       ├── App.css
+│       ├── index.css
+│       └── main.tsx
+│
+├── docs/
+│   ├── architecture.md
+│   ├── training-pipeline.md
+│   └── screenshots/
+│       ├── home.png
+│       ├── chat.png
+│       └── api.png
+│
+├── README.md
+├── package.json
+└── .gitignore
+```
+
+---
+
+# 🌐 Live Demo
+
+**YAAL Web Interface**
+
+https://yaal-ai.vercel.app/
+
+The live interface demonstrates the YAAL frontend. Local GPU inference remains part of the development/deployment architecture unless a remote inference service is configured.
+
+---
+
+# 🎯 Project Goals
+
+YAAL is intended to explore:
+
+- Tamil language model adaptation
+- Parameter-efficient fine-tuning
+- Tamil instruction datasets
+- Local LLM inference
+- GPU-constrained inference
+- Tamil conversational interfaces
+- Reproducible model evaluation
+- End-to-end AI application development
+
+---
+
+# 🔬 Future Work
+
+- [ ] Complete controlled Sarvam-1 vs YAAL benchmark
+- [ ] Expand Tamil evaluation dataset
+- [ ] Automated evaluation pipeline
+- [ ] Human evaluation study
+- [ ] Detailed error analysis
+- [ ] Generation-speed optimization
+- [ ] Memory optimization
+- [ ] Larger-scale Tamil evaluation
+- [ ] Improved deployment architecture
+- [ ] Additional Tamil instruction data
+- [ ] Model quantization experiments
 
 ---
 
 # ⚠️ Limitations
 
-YAAL is an experimental student/research project.
+YAAL is an experimental Tamil language-model adaptation.
 
-The current system has several limitations:
+Current limitations include:
 
-- Limited training dataset size
-- Consumer GPU constraints
-- Limited formal benchmark evaluation
-- Generation latency depends on local hardware
-- Model responses may contain factual errors
-- Tamil linguistic quality may vary depending on the prompt
-
-YAAL should therefore be treated as an experimental AI system rather than a production-grade general-purpose language model.
-
----
-
-# 🎯 Project Objectives
-
-The project aims to explore:
-
-```text
-Tamil NLP
-   +
-Small Language Models
-   +
-Parameter-Efficient Fine-Tuning
-   +
-GPU Inference
-   +
-Full-Stack AI Applications
-```
-
-The broader objective is to understand the complete lifecycle of a language-model application:
-
-```text
-Dataset
-   ↓
-Cleaning
-   ↓
-Fine-Tuning
-   ↓
-Model Adapter
-   ↓
-Inference
-   ↓
-API
-   ↓
-Frontend
-   ↓
-Deployment
-```
-
----
-
-# 🌱 Learning Outcomes
-
-This project provides practical experience with:
-
-- Large language model adaptation
-- Tamil NLP
-- Supervised fine-tuning
-- LoRA / PEFT
-- Hugging Face tooling
-- PyTorch
-- GPU inference
-- FastAPI
-- React
-- TypeScript
-- REST APIs
-- Git and GitHub
-- AI application deployment
-
----
-
-# 👨‍💻 Author
-
-## Nithiarasu
-
-AI & Data Science Student
-
-GitHub:
-
-https://github.com/Nithiarasu06
-
-Project:
-
-https://github.com/Nithiarasu06/yaal-ai
+- The controlled Sarvam-1 vs YAAL benchmark is not yet complete.
+- The current performance numbers are observations from development rather than statistically aggregated benchmarks.
+- Local inference is constrained by the available GPU memory.
+- Model quality can vary depending on prompt type.
+- The current evaluation does not establish superiority over the base model.
 
 ---
 
 # 📜 License
 
-This project is currently intended for educational and research purposes.
+Add the project's intended license here before distributing the repository publicly.
 
-A formal open-source license can be added as the project develops.
+The underlying model, datasets, libraries, and other third-party components remain subject to their respective licenses and terms.
 
 ---
 
-# 🙏 Acknowledgements
+# 👨‍💻 Author
 
-YAAL builds on open-source technologies and models from the broader AI/ML ecosystem.
+**Nithiarasu**
 
-Special thanks to the developers and researchers behind:
+AI & Data Science Student
 
-- Sarvam AI
-- Hugging Face
-- PyTorch
-- Transformers
-- PEFT
-- FastAPI
-- React
-- Vite
+GitHub:  
+https://github.com/Nithiarasu06
 
 ---
 
 <p align="center">
-
-### யாழ்
-
-**தமிழில் கேளுங்கள். YAAL உடன் உரையாடுங்கள்.**
-
-Built with ❤️ for Tamil AI.
-
+  <b>YAAL</b><br>
+  தமிழ் மொழிக்கான ஒரு பரிசோதனை AI திட்டம்.
 </p>
